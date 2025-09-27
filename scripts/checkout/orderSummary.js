@@ -4,6 +4,7 @@ import {formatCurrency} from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 hello();
 const today = dayjs();
@@ -113,22 +114,11 @@ export function renderOrderSummary() {
 
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
             container.remove();
+            renderPaymentSummary();
             document.querySelector('.js-return-to-home-link').innerHTML = getCartQuantity();
         })
     });
 
-    // export function getCartQuantity() {
-    // //function getCartQuantity() {
-
-    //     let cartQuantity = 0;
-
-    //     cart.forEach((cartItem) => {
-    //         cartQuantity += cartItem.quantity;
-    //     });
-    //     return cartQuantity;
-    // }
-
-    //getCartQuantity();
 
     document.querySelector('.js-return-to-home-link').innerHTML = getCartQuantity();
 
@@ -152,6 +142,7 @@ export function renderOrderSummary() {
             updateQuantity(productId, updatedNumber);
             document.querySelector('.js-quantity-label').innerHTML = updatedNumber;
             document.querySelector('.js-return-to-home-link').innerHTML = getCartQuantity();
+            renderPaymentSummary();
         });
     });
 
@@ -161,6 +152,7 @@ export function renderOrderSummary() {
             const deliveryOptionId = element.dataset.deliveryOptionId;
             updateDeliveryOption(productId, deliveryOptionId);
             renderOrderSummary();
+            renderPaymentSummary();
         });
     })
 
@@ -170,12 +162,10 @@ export function renderOrderSummary() {
 
 
  export function getCartQuantity() {
-    //function getCartQuantity() {
+    let cartQuantity = 0;
 
-        let cartQuantity = 0;
-
-        cart.forEach((cartItem) => {
-            cartQuantity += cartItem.quantity;
-        });
-        return cartQuantity;
-    }
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+    return cartQuantity;
+}
