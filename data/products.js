@@ -54,6 +54,12 @@ class Clothing extends Product {
   }
 }
 
+// function logThis() {
+//   console.log(this);
+// }
+
+// logThis.call('hello');
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -748,7 +754,33 @@ export const products = [
 ].map((productDetails) => {
   if (productDetails.type === 'clothing') {
     return new Clothing(productDetails);
-  } else {
+  } else { 
     return new Product(productDetails);
   }
 });
+
+
+
+// exercises not complete
+// class Car {
+//   brand;
+//   model;
+
+//   constructor(productDetails) {
+//     this.brand = productDetails.brand;
+//     this.model = productDetails.model;
+//   }
+
+//   displayInfo() {
+//     console.log(`${brand} ${model}`);
+//   }
+// }
+
+// const car1 = new Car({brand: 'Toyota', model: 'Corolla'});
+// const car2 = new Car({brand: 'Tesla', model: 'Model3'})
+
+// console.log(car1);
+
+
+// car1.displayInfo();
+// car2.displayInfo();
